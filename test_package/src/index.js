@@ -6,13 +6,13 @@ document.body.style.margin = "0";
 document.body.style.padding = "0";
 
 const title = document.createElement("p");
-title.innerText = "Babylon.js NPM Package Template";
+
 title.style.fontSize = "32pt";
 title.style.textAlign = "center";
 document.body.appendChild(title);
 
 const div = document.createElement("div");
-div.style.width = "60%";
+div.style.width = "90%";
 div.style.margin = "0 auto";
 div.style.aspectRatio = "16 / 9";
 document.body.appendChild(div);
