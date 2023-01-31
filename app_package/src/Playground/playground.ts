@@ -23,9 +23,10 @@ class Playground {
 
         // Our built-in 'sphere' shape. Params: name, subdivs, size, scene
         var sphere = BABYLON.Mesh.CreateSphere("sphere1", 16, 2, scene);
-
+        var sphere2 = BABYLON.Mesh.CreateSphere("sphere2", 16, 2, scene);
         // Move the sphere upward 1/2 its height
         //sphere.position.y = 1;
+        scene.attachControl(true,true,true);
         var xSlide = new BABYLON.Animation("xSlide", "position.x", 10, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
         var keyFramesP = []; 
 
@@ -47,6 +48,50 @@ class Playground {
     var startAnimation = true;
     
     xSlide.setKeys(keyFramesP);
+
+
+    scene.onKeyboardObservable.add((kbInfo) => {
+		switch (kbInfo.type) {
+			case BABYLON.KeyboardEventTypes.KEYDOWN:
+				switch (kbInfo.event.key) {
+                    case "a":
+                    case "A":
+                        sphere.position.x -= 0.1;
+                    break
+                    case "d":
+                    case "D":
+                        sphere.position.x += 0.1;
+                    break
+                    case "w":
+                    case "W":
+                        sphere.position.y += 0.1;
+                    break
+                    case "s":
+                    case "S":
+                        sphere.position.y -= 0.1;
+                    break
+                    case "j":
+                    case "J":
+                        sphere2.position.x -= 0.1;
+                    break
+                    case "l":
+                    case "L":
+                        sphere2.position.x += 0.1;
+                    break
+                    case "i":
+                    case "I":
+                        sphere2.position.y += 0.1;
+                    break
+                    case "k":
+                    case "K":
+                        sphere2.position.y -= 0.1;
+                    break
+                }
+			break;
+		}
+	});
+
+
         // Our built-in 'ground' shape. Params: name, width, depth, subdivs, scene
         var ground = BABYLON.Mesh.CreateGround("ground1", 6, 6, 2, scene);
 
@@ -59,10 +104,13 @@ class Playground {
                 console.log(xSlide);
     
                 scene.beginDirectAnimation(box, [xSlide], 0, 2*10, true); //doesn't work
-    
+                //scene.beginDirectAnimation(sphere, [xSlide],0, 2*10, true)
                 //BABYLON.Animation.CreateAndStartAnimation('zzz', box, 'rotation.z', 20, 20, 0.0, Math.PI / 2 , BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE); //works
             }
         });
+
+        
+
         return scene;
     }
 
